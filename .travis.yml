@@ -22,4 +22,4 @@ before_install:
 
 # Build
 script:
-    - ./gradlew install
+    - ./gradlew build
