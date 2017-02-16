@@ -43,8 +43,8 @@ public class Diagnostics extends Command {
 				Thread.activeCount()
 		);
 
-		// Send Response
-		getTwitchClient().getIrcClient().sendMessage(messageEvent.getChannel().getName(), response);
+		// Send Response (in Private - sensitive information)
+		getTwitchClient().getIrcClient().sendPrivateMessage(messageEvent.getUser().getName(), response);
 	}
 
 	/**

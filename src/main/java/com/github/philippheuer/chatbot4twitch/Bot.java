@@ -33,7 +33,7 @@ public class Bot {
         twitchClient = TwitchClient.builder()
                 .clientId(getConfiguration().getApi().get("twitch_client_id"))
                 .clientSecret(getConfiguration().getApi().get("twitch_client_secret"))
-                .ircCedentials(new OAuthCredential(getConfiguration().getCredentials().get("irc")))
+                .ircCredential(new OAuthCredential(getConfiguration().getCredentials().get("irc")))
                 .configurationAutoSave(true)
                 .configurationDirectory(new File("").getAbsolutePath())
                 .build();

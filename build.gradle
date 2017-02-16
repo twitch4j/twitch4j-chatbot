@@ -33,7 +33,7 @@ dependencies {
     compile("com.jcabi:jcabi-log:0.17.2")
 
     // Twitch4J
-    compile('com.github.PhilippHeuer:twitch4j:0.0.2')
+    compile('com.github.PhilippHeuer:twitch4j:0.0.3')
 
     // JSON / YAML
     compile("com.fasterxml.jackson.core:jackson-databind:2.8.6")
