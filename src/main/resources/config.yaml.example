@@ -1,0 +1,40 @@
+########################################################################################
+#                                                                                      #
+#  _____        _ _       _       ___    ___   _____ _           _   _           _     #
+# |_   _|      (_) |     | |     /   |  |_  | /  __ \ |         | | | |         | |    #
+#   | |_      ___| |_ ___| |__  / /| |    | | | /  \/ |__   __ _| |_| |__   ___ | |_   #
+#   | \ \ /\ / / | __/ __| '_ \/ /_| |    | | | |   | '_ \ / _` | __| '_ \ / _ \| __|  #
+#   | |\ V  V /| | || (__| | | \___  |/\__/ / | \__/\ | | | (_| | |_| |_) | (_) | |_   #
+#   \_/ \_/\_/ |_|\__\___|_| |_|   |_/\____/   \____/_| |_|\__,_|\__|_.__/ \___/ \__|  #
+#                                                                                      #
+#                                                                                      #
+#      This is an example configuration file for a Twitch4J Chatbot.                   #
+#      Please read and change all options to suit your setup.                          #
+#      Then rename the file to config.yaml                                             #
+#                                                                                      #
+########################################################################################
+
+debug: false
+bot:
+    # Name of your bot
+    name: "twitch4j chatbot"
+
+    # Current version of your bot
+    version: "0.1"
+
+# Application - API Settings
+api:
+    # Twitch Application Client Id
+    twitch_client_id: YOUR_CLIENT_ID
+
+    # Twitch Application Client Secret
+    twitch_client_secret: YOUR_CLIENT_SECRET
+
+# Credentials
+credentials:
+    # OAuth Token for IRC USer (You can get yours here: http://twitchapps.com/tmi/)
+    irc: YOUR_IRC_TOKEN
+
+# Channels - The bot will connect to all listet channels
+channels:
+    - YOUR_CHANNEL

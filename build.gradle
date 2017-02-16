@@ -10,9 +10,6 @@ plugins {
     id 'java'
 }
 
-group 'com.github.philippheuer'
-version '1.0-SNAPSHOT'
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -36,5 +33,9 @@ dependencies {
     compile("com.jcabi:jcabi-log:0.17.2")
 
     // Twitch4J
-    compile('com.github.PhilippHeuer:twitch4j:develop-SNAPSHOT')
+    compile('com.github.PhilippHeuer:twitch4j:0.0.2')
+
+    // JSON / YAML
+    compile("com.fasterxml.jackson.core:jackson-databind:2.8.6")
+
 }

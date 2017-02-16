@@ -42,6 +42,9 @@ local.properties
 # Exceptions
 !gradle/wrapper/*.jar
 
+# Config files
+*.yaml
+
 # Logs / Save Files
 credentials.json
 client.log

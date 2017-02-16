@@ -13,7 +13,7 @@ Support:
 --------
 
 ## A quick note:
-This Chatbot is part of the [Twitch4J API](https://github.com/PhilippHeuer/twitch4j).
+This Chatbot is part of the [Twitch4J API](https://github.com/PhilippHeuer/twitch4j) project.
 
 
 ## Chat Token
