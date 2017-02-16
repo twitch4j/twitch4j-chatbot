@@ -2,7 +2,7 @@ package com.github.philippheuer.chatbot4twitch;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.github.philippheuer.chatbot4twitch.commands.general.About;
+import com.github.philippheuer.chatbot4twitch.commands.general.*;
 import me.philippheuer.twitch4j.TwitchClient;
 import me.philippheuer.twitch4j.auth.model.OAuthCredential;
 import me.philippheuer.twitch4j.endpoints.ChannelEndpoint;
@@ -44,6 +44,11 @@ public class Bot {
      */
     public void registerCommands() {
         twitchClient.getCommandHandler().registerCommand(About.class);
+        twitchClient.getCommandHandler().registerCommand(Dice.class);
+        twitchClient.getCommandHandler().registerCommand(Eightball.class);
+        twitchClient.getCommandHandler().registerCommand(Pick.class);
+        twitchClient.getCommandHandler().registerCommand(Rate.class);
+        twitchClient.getCommandHandler().registerCommand(Help.class);
     }
 
     /**

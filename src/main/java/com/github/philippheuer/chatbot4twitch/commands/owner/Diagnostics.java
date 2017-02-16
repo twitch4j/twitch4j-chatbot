@@ -44,7 +44,7 @@ public class Diagnostics extends Command {
 		);
 
 		// Send Response (in Private - sensitive information)
-		getTwitchClient().getIrcClient().sendPrivateMessage(messageEvent.getUser().getName(), response);
+		sendMessageToChannel(messageEvent.getChannel().getName(), response);
 	}
 
 	/**
