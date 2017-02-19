@@ -46,5 +46,5 @@ local.properties
 *.yaml
 
 # Logs / Save Files
-credentials.json
+config/*
 client.log
