@@ -38,9 +38,9 @@ public class CommandAdd extends Command {
         setCommand("addcommand");
         setCommandAliases(new String[]{});
         setCategory("moderation");
-        setDescription("Add's a new command!");
+        setDescription("Add's a dynamic command!");
         getRequiredPermissions().add(CommandPermission.BROADCASTER);
-        setUsageExample("addcommand -c kappa KappaHD only.");
+        setUsageExample("addcommand -c youtube -r Check out my Youtube at youtube.com/example");
     }
 
     /**

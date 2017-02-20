@@ -19,7 +19,7 @@ public class CommandRemove extends Command {
         setCategory("moderation");
         setDescription("Removes a dynamic command!");
         getRequiredPermissions().add(CommandPermission.MODERATOR);
-        setUsageExample("");
+        setUsageExample("removecommand youtube command2 command3");
     }
 
     /**
