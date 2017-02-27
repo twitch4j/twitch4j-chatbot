@@ -1,47 +1,47 @@
 package com.github.philippheuer.chatbot4twitch.commands.general;
 
 import me.philippheuer.twitch4j.chat.commands.Command;
-import me.philippheuer.twitch4j.enums.CommandPermission;
-import me.philippheuer.twitch4j.events.event.MessageEvent;
+import me.philippheuer.twitch4j.chat.commands.CommandPermission;
+import me.philippheuer.twitch4j.events.event.ChannelMessageEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Pick extends Command {
-	/**
-	 * Initialize Command
-	 */
-	public Pick() {
-		super();
-		
-		// Command Configuration
-		setCommand("pick");
-		setCommandAliases(new String[]{});
-		setCategory("general");
-		setDescription("Lets the bot pick one out of several options.");
-		getRequiredPermissions().add(CommandPermission.EVERYONE);
-		setUsageExample("");
-	}
+    /**
+     * Initialize Command
+     */
+    public Pick() {
+        super();
 
-	/**
-	 * executeCommand Logic
-	 */
-	@Override
-	public void executeCommand(MessageEvent messageEvent) {
-		super.executeCommand(messageEvent);
+        // Command Configuration
+        setCommand("pick");
+        setCommandAliases(new String[]{});
+        setCategory("general");
+        setDescription("Lets the bot pick one out of several options.");
+        getRequiredPermissions().add(CommandPermission.EVERYONE);
+        setUsageExample("");
+    }
 
-		// Get Choices from CommandContent
-		String[] choices = getCommandArgumentSeperatedList("or");
+    /**
+     * executeCommand Logic
+     */
+    @Override
+    public void executeCommand(ChannelMessageEvent messageEvent) {
+        super.executeCommand(messageEvent);
 
-		// Handle Command
-		if(choices.length >= 2) {
-			Integer randomIndex = ThreadLocalRandom.current().nextInt(0, choices.length);
+        // Get Choices from CommandContent
+        String[] choices = getCommandArgumentSeperatedList("or");
 
-			// Prepare Response
-			String response = String.format("I choose %s.", choices[randomIndex]);
+        // Handle Command
+        if (choices.length >= 2) {
+            Integer randomIndex = ThreadLocalRandom.current().nextInt(0, choices.length);
 
-			// Send Response
-			sendMessageToChannel(messageEvent.getChannel().getName(), response);
-		}
-	}
+            // Prepare Response
+            String response = String.format("I choose %s.", choices[randomIndex]);
+
+            // Send Response
+            sendMessageToChannel(messageEvent.getChannel().getName(), response);
+        }
+    }
 
 }

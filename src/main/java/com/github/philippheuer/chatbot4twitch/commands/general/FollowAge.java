@@ -1,8 +1,8 @@
 package com.github.philippheuer.chatbot4twitch.commands.general;
 
 import me.philippheuer.twitch4j.chat.commands.Command;
-import me.philippheuer.twitch4j.enums.CommandPermission;
-import me.philippheuer.twitch4j.events.event.MessageEvent;
+import me.philippheuer.twitch4j.chat.commands.CommandPermission;
+import me.philippheuer.twitch4j.events.event.ChannelMessageEvent;
 import me.philippheuer.twitch4j.model.Follow;
 import me.philippheuer.twitch4j.model.User;
 
@@ -28,24 +28,24 @@ public class FollowAge extends Command {
      * executeCommand Logic
      */
     @Override
-    public void executeCommand(MessageEvent messageEvent) {
+    public void executeCommand(ChannelMessageEvent messageEvent) {
         super.executeCommand(messageEvent);
 
         // Get Target (or self)
         User commandTarget = getCommandArgumentTargetUserOrSelf();
 
         // Get Follow Age
-		Optional<Follow> follow = getTwitchClient().getUserEndpoint().checkUserFollowByChannel(commandTarget.getId(), messageEvent.getChannel().getId());
+        Optional<Follow> follow = getTwitchClient().getUserEndpoint().checkUserFollowByChannel(commandTarget.getId(), messageEvent.getChannel().getId());
 
-		// Response
-		if(follow.isPresent()) {
-			// Following
-			String response = String.format("%s is following since %s!", commandTarget.getName(), follow.get().getCreatedAt().toString());
-			sendMessageToChannel(messageEvent.getChannel().getName(), response);
-		} else {
-			// Not Following
-			String response = String.format("%s is not following!", commandTarget.getName());
-			sendMessageToChannel(messageEvent.getChannel().getName(), response);
-		}
+        // Response
+        if (follow.isPresent()) {
+            // Following
+            String response = String.format("%s is following since %s!", commandTarget.getName(), follow.get().getCreatedAt().toString());
+            sendMessageToChannel(messageEvent.getChannel().getName(), response);
+        } else {
+            // Not Following
+            String response = String.format("%s is not following!", commandTarget.getName());
+            sendMessageToChannel(messageEvent.getChannel().getName(), response);
+        }
     }
 }

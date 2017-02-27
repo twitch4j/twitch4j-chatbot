@@ -1,8 +1,8 @@
 package com.github.philippheuer.chatbot4twitch.commands.general;
 
 import me.philippheuer.twitch4j.chat.commands.Command;
-import me.philippheuer.twitch4j.enums.CommandPermission;
-import me.philippheuer.twitch4j.events.event.MessageEvent;
+import me.philippheuer.twitch4j.chat.commands.CommandPermission;
+import me.philippheuer.twitch4j.events.event.ChannelMessageEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -26,7 +26,7 @@ public class Dice extends Command {
      * executeCommand Logic
      */
     @Override
-    public void executeCommand(MessageEvent messageEvent) {
+    public void executeCommand(ChannelMessageEvent messageEvent) {
         super.executeCommand(messageEvent);
 
         // Roll the Dice
