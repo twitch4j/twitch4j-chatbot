@@ -8,6 +8,8 @@ import com.github.philippheuer.chatbot4twitch.commands.moderation.CommandRemove;
 import me.philippheuer.twitch4j.TwitchClient;
 import me.philippheuer.twitch4j.auth.model.OAuthCredential;
 import me.philippheuer.twitch4j.endpoints.ChannelEndpoint;
+import me.philippheuer.twitch4j.events.EventSubscriber;
+import me.philippheuer.twitch4j.events.event.ChannelMessageEvent;
 
 import java.io.File;
 import java.io.InputStream;
@@ -39,6 +41,9 @@ public class Bot {
                 .configurationAutoSave(true)
                 .configurationDirectory(new File("config").getAbsolutePath())
                 .build();
+
+        // Register this class to recieve events using the EventSubscriber Annotation
+        twitchClient.getDispatcher().registerListener(this);
     }
 
     /**
@@ -80,7 +85,7 @@ public class Bot {
         for (String channel : configuration.getChannels()) {
             Long channelId = twitchClient.getUserEndpoint().getUserIdByUserName(channel).get();
             ChannelEndpoint channelEndpoint = twitchClient.getChannelEndpoint(channelId);
-            channelEndpoint.setChannelEventListener(null);
+            channelEndpoint.registerEventListener();
         }
     }
 
@@ -88,4 +93,11 @@ public class Bot {
         return configuration;
     }
 
+    /**
+     * Subscribe to the ChannelMessage Event and write the output to the console
+     */
+    @EventSubscriber
+    public void onChannelMessage(ChannelMessageEvent event) {
+        System.out.println("Channel [" +event.getChannel().getDisplayName() + "] - User[" + event.getUser().getDisplayName() + "] - Message [" + event.getMessage() + "]");
+    }
 }
