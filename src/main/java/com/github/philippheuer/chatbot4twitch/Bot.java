@@ -5,6 +5,10 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.philippheuer.chatbot4twitch.commands.general.*;
 import com.github.philippheuer.chatbot4twitch.commands.moderation.CommandAdd;
 import com.github.philippheuer.chatbot4twitch.commands.moderation.CommandRemove;
+import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnDonation;
+import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnFollow;
+import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnSubscription;
+import com.github.philippheuer.chatbot4twitch.features.WriteChannelChatToConsole;
 import me.philippheuer.twitch4j.TwitchClient;
 import me.philippheuer.twitch4j.auth.model.OAuthCredential;
 import me.philippheuer.twitch4j.endpoints.ChannelEndpoint;
@@ -64,6 +68,16 @@ public class Bot {
     }
 
     /**
+     * Method to register all features
+     */
+    public void registerFeatures() {
+        twitchClient.getDispatcher().registerListener(new WriteChannelChatToConsole());
+        twitchClient.getDispatcher().registerListener(new ChannelNotificationOnFollow());
+        twitchClient.getDispatcher().registerListener(new ChannelNotificationOnSubscription());
+        twitchClient.getDispatcher().registerListener(new ChannelNotificationOnDonation());
+    }
+
+    /**
      * Load the Configuration
      */
     private void loadConfiguration() {
@@ -93,11 +107,4 @@ public class Bot {
         return configuration;
     }
 
-    /**
-     * Subscribe to the ChannelMessage Event and write the output to the console
-     */
-    @EventSubscriber
-    public void onChannelMessage(ChannelMessageEvent event) {
-        System.out.println("Channel [" +event.getChannel().getDisplayName() + "] - User[" + event.getUser().getDisplayName() + "] - Message [" + event.getMessage() + "]");
-    }
 }
