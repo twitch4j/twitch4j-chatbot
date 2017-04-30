@@ -34,7 +34,16 @@ dependencies {
 
     // Twitch4J
     compile('com.github.PhilippHeuer:twitch4j:develop-SNAPSHOT')
+}
 
-    // JSON / YAML
-    compile("com.fasterxml.jackson.core:jackson-databind:2.8.6")
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'CHatbot Example',
+                'Implementation-Version': 'v0.0.1',
+                'Main-Class': 'com.github.philippheuer.chatbot4twitch.Launcher'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
