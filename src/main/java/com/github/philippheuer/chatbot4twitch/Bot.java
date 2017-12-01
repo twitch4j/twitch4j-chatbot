@@ -10,10 +10,8 @@ import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnFoll
 import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnSubscription;
 import com.github.philippheuer.chatbot4twitch.features.WriteChannelChatToConsole;
 import me.philippheuer.twitch4j.TwitchClient;
-import me.philippheuer.twitch4j.auth.model.OAuthCredential;
+import me.philippheuer.twitch4j.TwitchClientBuilder;
 import me.philippheuer.twitch4j.endpoints.ChannelEndpoint;
-import me.philippheuer.twitch4j.events.EventSubscriber;
-import me.philippheuer.twitch4j.events.event.ChannelMessageEvent;
 
 import java.io.File;
 import java.io.InputStream;
@@ -38,13 +36,13 @@ public class Bot {
         loadConfiguration();
 
         // Initialization
-        twitchClient = TwitchClient.builder()
-                .clientId(getConfiguration().getApi().get("twitch_client_id"))
-                .clientSecret(getConfiguration().getApi().get("twitch_client_secret"))
-                .ircCredential(new OAuthCredential(getConfiguration().getCredentials().get("irc")))
-                .configurationAutoSave(true)
-                .configurationDirectory(new File("config").getAbsolutePath())
-                .build();
+        twitchClient = TwitchClientBuilder.init()
+                .withClientId(getConfiguration().getApi().get("twitch_client_id"))
+                .withClientSecret(getConfiguration().getApi().get("twitch_client_secret"))
+                .withCredential(getConfiguration().getCredentials().get("irc"))
+                .withAutoSaveConfiguration(true)
+                .withConfigurationDirectory(new File("config"))
+                .connect();
 
         // Register this class to recieve events using the EventSubscriber Annotation
         twitchClient.getDispatcher().registerListener(this);

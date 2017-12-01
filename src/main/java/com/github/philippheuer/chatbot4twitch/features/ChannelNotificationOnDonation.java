@@ -1,8 +1,7 @@
 package com.github.philippheuer.chatbot4twitch.features;
 
 import me.philippheuer.twitch4j.events.EventSubscriber;
-import me.philippheuer.twitch4j.events.event.DonationEvent;
-import me.philippheuer.twitch4j.events.event.FollowEvent;
+import me.philippheuer.twitch4j.events.event.channel.DonationEvent;
 
 public class ChannelNotificationOnDonation {
 
@@ -13,7 +12,7 @@ public class ChannelNotificationOnDonation {
     public void onDonation(DonationEvent event) {
         String message = String.format("%s just donated %s using %s!", event.getUser().getDisplayName(), event.getAmount(), event.getSource());
 
-        event.getClient().getIrcClient().sendMessage(event.getChannel().getName(), message);
+        event.getClient().getMessageInterface().sendMessage(event.getChannel().getName(), message);
     }
 
 }

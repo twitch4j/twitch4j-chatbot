@@ -1,9 +1,9 @@
 package com.github.philippheuer.chatbot4twitch.commands.moderation;
 
-import me.philippheuer.twitch4j.chat.commands.Command;
-import me.philippheuer.twitch4j.chat.commands.CommandPermission;
-import me.philippheuer.twitch4j.chat.commands.DynamicCommand;
-import me.philippheuer.twitch4j.events.event.ChannelMessageEvent;
+import me.philippheuer.twitch4j.events.event.irc.ChannelMessageEvent;
+import me.philippheuer.twitch4j.message.commands.Command;
+import me.philippheuer.twitch4j.message.commands.CommandPermission;
+import me.philippheuer.twitch4j.message.commands.DynamicCommand;
 import me.philippheuer.util.conversion.TypeConvert;
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.spi.StringArrayOptionHandler;
@@ -73,6 +73,6 @@ public class CommandAdd extends Command {
 
         // Send Response
         String response = String.format("Command %s has been added!", dynamicCommand.getCommand());
-        getTwitchClient().getIrcClient().sendPrivateMessage(messageEvent.getUser().getName(), response);
+        getTwitchClient().getMessageInterface().sendPrivateMessage(messageEvent.getUser().getName(), response);
     }
 }
