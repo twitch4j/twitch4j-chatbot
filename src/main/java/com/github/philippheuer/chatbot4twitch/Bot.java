@@ -44,7 +44,7 @@ public class Bot {
                 .withConfigurationDirectory(new File("config"))
                 .connect();
 
-        // Register this class to recieve events using the EventSubscriber Annotation
+        // Register this class to receive events using the EventSubscriber Annotation
         twitchClient.getDispatcher().registerListener(this);
     }
 
