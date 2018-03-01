@@ -7,15 +7,17 @@
  */
 
 plugins {
-    //Add a shadowJar task to gradle
-    //It creates a runnable jar file containing all dependencies
-    //You can find it in build/libs/twitch4j-chatbot-all.jar
+    // Add a shadowJar task to build a fatJar: build/libs/twitch4j-chatbot-all.jar
     id 'com.github.johnrengelman.shadow' version '2.0.2'
     id 'java'
+    id 'application'
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+// Sets the Main-Class in the shadowJar manifest
+mainClassName = 'com.github.philippheuer.chatbot4twitch.Launcher'
 
 // Repositories
 allprojects {
