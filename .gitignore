@@ -48,3 +48,6 @@ local.properties
 # Logs / Save Files
 config/*
 client.log
+
+# Visual Studio Code
+.vscode/

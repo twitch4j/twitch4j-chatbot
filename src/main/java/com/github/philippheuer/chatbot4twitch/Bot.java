@@ -11,7 +11,6 @@ import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnSubs
 import com.github.philippheuer.chatbot4twitch.features.WriteChannelChatToConsole;
 import me.philippheuer.twitch4j.TwitchClient;
 import me.philippheuer.twitch4j.TwitchClientBuilder;
-import me.philippheuer.twitch4j.endpoints.ChannelEndpoint;
 
 import java.io.File;
 import java.io.InputStream;
@@ -95,9 +94,7 @@ public class Bot {
     public void start() {
         // Connect to all channels
         for (String channel : configuration.getChannels()) {
-            Long channelId = twitchClient.getUserEndpoint().getUserIdByUserName(channel).get();
-            ChannelEndpoint channelEndpoint = twitchClient.getChannelEndpoint(channelId);
-            channelEndpoint.registerEventListener();
+            twitchClient.getMessageInterface().joinChannel(channel);
         }
     }
 
