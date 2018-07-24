@@ -13,12 +13,12 @@ public class ChannelNotificationOnSubscription {
         String message = "";
 
         // New Subscription
-        if(event.getSubscription().getStreak() <= 1) {
+        if(event.getMonths() <= 1) {
             message = String.format("%s has subscribed to %s!", event.getUser().getDisplayName(), event.getChannel().getDisplayName());
         }
         // Resubscription
-        if(event.getSubscription().getStreak() > 1) {
-            message = String.format("%s has subscribed to %s in his %s month!", event.getUser().getDisplayName(), event.getChannel().getDisplayName(), event.getSubscription().getStreak());
+        if(event.getMonths() > 1) {
+            message = String.format("%s has subscribed to %s in his %s month!", event.getUser().getDisplayName(), event.getChannel().getDisplayName(), event.getMonths());
         }
 
         // Send Message

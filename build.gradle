@@ -33,5 +33,5 @@ dependencies {
     compile("com.jcabi:jcabi-log:0.17.2")
 
     // Twitch4J
-    compile('com.github.twitch4j:twitch4j:v0.10.0')
+    compile('com.github.twitch4j:twitch4j:v0.11.0')
 }
