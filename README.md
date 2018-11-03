@@ -2,8 +2,7 @@
 
 Project Information:
 
-[![Build Status](https://travis-ci.org/PhilippHeuer/twitch4j-chatbot.svg?branch=master)](https://travis-ci.org/PhilippHeuer/twitch4j-chatbot)
-[![Dependency Status](https://www.versioneye.com/user/projects/58a4e597b4d2a200369506a3/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/58a4e597b4d2a200369506a3)
+[![Build Status](https://travis-ci.org/twitch4j/twitch4j-chatbot.svg?branch=master)](https://travis-ci.org/twitch4j/twitch4j-chatbot)
 
 Support:
 
