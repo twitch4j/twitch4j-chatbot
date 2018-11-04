@@ -33,5 +33,5 @@ dependencies {
     compile group: 'com.jcabi', name: 'jcabi-log', version: '0.17.2'
 
     // Twitch4J
-    compile group: 'com.github.twitch4j', name: 'twitch4j', version: 'v0.11.2'
+    compile 'com.github.twitch4j:Twitch4J:v0.12.0'
 }
