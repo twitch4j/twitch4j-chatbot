@@ -1,7 +1,7 @@
 package com.github.twitch4j.chatbot.features;
 
-import me.philippheuer.twitch4j.events.EventSubscriber;
-import me.philippheuer.twitch4j.events.event.irc.ChannelMessageEvent;
+import com.github.philippheuer.events4j.annotation.EventSubscriber;
+import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
 
 public class WriteChannelChatToConsole {
 
@@ -10,7 +10,12 @@ public class WriteChannelChatToConsole {
      */
     @EventSubscriber
     public void onChannelMessage(ChannelMessageEvent event) {
-        System.out.println("Channel [" +event.getChannel().getDisplayName() + "] - User[" + event.getUser().getDisplayName() + "] - Message [" + event.getMessage() + "]");
+        System.out.printf(
+                "Channel [%s] - User[%s] - Message [%s]%n",
+                event.getChannel().getName(),
+                event.getUser().getName(),
+                event.getMessage()
+        );
     }
-    
+
 }

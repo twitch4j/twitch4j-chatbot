@@ -1,7 +1,7 @@
 package com.github.twitch4j.chatbot.features;
 
-import me.philippheuer.twitch4j.events.EventSubscriber;
-import me.philippheuer.twitch4j.events.event.channel.SubscriptionEvent;
+import com.github.philippheuer.events4j.annotation.EventSubscriber;
+import com.github.twitch4j.chat.events.channel.SubscriptionEvent;
 
 public class ChannelNotificationOnSubscription {
 
@@ -13,16 +13,24 @@ public class ChannelNotificationOnSubscription {
         String message = "";
 
         // New Subscription
-        if(event.getMonths() <= 1) {
-            message = String.format("%s has subscribed to %s!", event.getUser().getDisplayName(), event.getChannel().getDisplayName());
+        if (event.getMonths() <= 1) {
+            message = String.format(
+                    "%s has subscribed to %s!",
+                    event.getUser().getName(),
+                    event.getChannel().getName()
+            );
         }
         // Resubscription
-        if(event.getMonths() > 1) {
-            message = String.format("%s has subscribed to %s in his %s month!", event.getUser().getDisplayName(), event.getChannel().getDisplayName(), event.getMonths());
+        if (event.getMonths() > 1) {
+            message = String.format(
+                    "%s has subscribed to %s in his %s month!",
+                    event.getUser().getName(),
+                    event.getChannel().getName(),
+                    event.getMonths()
+            );
         }
 
         // Send Message
-        event.getClient().getMessageInterface().sendMessage(event.getChannel().getName(), message);
+        event.getTwitchChat().sendMessage(event.getChannel().getName(), message);
     }
-
 }

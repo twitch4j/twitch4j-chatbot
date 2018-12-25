@@ -1,7 +1,7 @@
 package com.github.twitch4j.chatbot.features;
 
-import me.philippheuer.twitch4j.events.EventSubscriber;
-import me.philippheuer.twitch4j.events.event.channel.FollowEvent;
+import com.github.philippheuer.events4j.annotation.EventSubscriber;
+import com.github.twitch4j.chat.events.channel.FollowEvent;
 
 public class ChannelNotificationOnFollow {
 
@@ -10,9 +10,13 @@ public class ChannelNotificationOnFollow {
      */
     @EventSubscriber
     public void onFollow(FollowEvent event) {
-        String message = String.format("%s is now following %s!", event.getUser().getDisplayName(), event.getChannel().getDisplayName());
+        String message = String.format(
+                "%s is now following %s!",
+                event.getUser().getName(),
+                event.getChannel().getName()
+        );
 
-        event.getClient().getMessageInterface().sendMessage(event.getChannel().getName(), message);
+        event.getTwitchChat().sendMessage(event.getChannel().getName(), message);
     }
 
 }
