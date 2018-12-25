@@ -1,21 +1,23 @@
-package com.github.philippheuer.chatbot4twitch.commands.general;
+package com.github.twitch4j.chatbot.commands.general;
 
 import me.philippheuer.twitch4j.events.event.irc.ChannelMessageEvent;
 import me.philippheuer.twitch4j.message.commands.Command;
 import me.philippheuer.twitch4j.message.commands.CommandPermission;
 
-public class About extends Command {
+import java.util.concurrent.ThreadLocalRandom;
+
+public class Rate extends Command {
     /**
      * Initialize Command
      */
-    public About() {
+    public Rate() {
         super();
 
         // Command Configuration
-        setCommand("about");
-        setCommandAliases(new String[]{"development", "framework"});
+        setCommand("rate");
+        setCommandAliases(new String[]{});
         setCategory("general");
-        setDescription("Displays information about the bot.");
+        setDescription("Rates a given user. If no user is given it rates you.");
         getRequiredPermissions().add(CommandPermission.EVERYONE);
         setUsageExample("");
     }
@@ -27,8 +29,11 @@ public class About extends Command {
     public void executeCommand(ChannelMessageEvent messageEvent) {
         super.executeCommand(messageEvent);
 
+        // Roll the Dice
+        Integer diceResult = ThreadLocalRandom.current().nextInt(1, 10);
+
         // Prepare Response
-        String response = String.format("This bot was created using the Twitch4J API.");
+        String response = String.format("I rate %s a %d out of 10.", messageEvent.getUser().getName(), diceResult);
 
         // Send Response
         sendMessageToChannel(messageEvent.getChannel().getName(), response);

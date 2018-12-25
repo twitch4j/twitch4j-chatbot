@@ -1,14 +1,15 @@
-package com.github.philippheuer.chatbot4twitch;
+package com.github.twitch4j.chatbot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import com.github.philippheuer.chatbot4twitch.commands.general.*;
-import com.github.philippheuer.chatbot4twitch.commands.moderation.CommandAdd;
-import com.github.philippheuer.chatbot4twitch.commands.moderation.CommandRemove;
-import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnDonation;
-import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnFollow;
-import com.github.philippheuer.chatbot4twitch.features.ChannelNotificationOnSubscription;
-import com.github.philippheuer.chatbot4twitch.features.WriteChannelChatToConsole;
+import com.github.twitch4j.chatbot.commands.general.*;
+import com.github.twitch4j.chatbot.commands.moderation.CommandAdd;
+import com.github.twitch4j.chatbot.commands.moderation.CommandRemove;
+import com.github.twitch4j.chatbot.features.ChannelNotificationOnDonation;
+import com.github.twitch4j.chatbot.features.ChannelNotificationOnFollow;
+import com.github.twitch4j.chatbot.features.ChannelNotificationOnSubscription;
+import com.github.twitch4j.chatbot.features.WriteChannelChatToConsole;
+import com.github.twitch4j.chatbot.commands.general.*;
 import me.philippheuer.twitch4j.TwitchClient;
 import me.philippheuer.twitch4j.TwitchClientBuilder;
 

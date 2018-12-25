@@ -1,4 +1,4 @@
-package com.github.philippheuer.chatbot4twitch.commands.moderation;
+package com.github.twitch4j.chatbot.commands.moderation;
 
 import me.philippheuer.twitch4j.events.event.irc.ChannelMessageEvent;
 import me.philippheuer.twitch4j.message.commands.Command;

@@ -1,4 +1,4 @@
-package com.github.philippheuer.chatbot4twitch;
+package com.github.twitch4j.chatbot;
 
 public class Launcher {
 

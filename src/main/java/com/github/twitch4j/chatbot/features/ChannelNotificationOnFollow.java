@@ -1,4 +1,4 @@
-package com.github.philippheuer.chatbot4twitch.features;
+package com.github.twitch4j.chatbot.features;
 
 import me.philippheuer.twitch4j.events.EventSubscriber;
 import me.philippheuer.twitch4j.events.event.channel.FollowEvent;
