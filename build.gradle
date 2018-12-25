@@ -28,5 +28,4 @@ dependencies {
     // Logging
     compile "ch.qos.logback:logback-classic:1.1.8"
     compile "com.jcabi:jcabi-log:0.17.2"
-
 }
