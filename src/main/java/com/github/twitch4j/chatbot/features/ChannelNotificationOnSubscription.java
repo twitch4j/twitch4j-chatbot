@@ -1,14 +1,22 @@
 package com.github.twitch4j.chatbot.features;
 
-import com.github.philippheuer.events4j.annotation.EventSubscriber;
+import com.github.philippheuer.events4j.EventManager;
 import com.github.twitch4j.chat.events.channel.SubscriptionEvent;
 
 public class ChannelNotificationOnSubscription {
 
     /**
+     * Register events of this class with the EventManager
+     *
+     * @param eventManager EventManager
+     */
+    public ChannelNotificationOnSubscription(EventManager eventManager) {
+        eventManager.onEvent(SubscriptionEvent.class).subscribe(event -> onSubscription(event));
+    }
+
+    /**
      * Subscribe to the Subscription Event
      */
-    @EventSubscriber
     public void onSubscription(SubscriptionEvent event) {
         String message = "";
 

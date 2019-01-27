@@ -20,7 +20,7 @@ repositories {
 // Dependencies
 dependencies {
     // Twitch4J
-    compile "com.github.twitch4j:twitch4j:1.0.0-alpha.5"
+    compile "com.github.twitch4j:twitch4j:1.0.0-alpha.7"
 
     // YAML Parser
     compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.0"

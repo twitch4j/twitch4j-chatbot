@@ -33,22 +33,24 @@ public class Bot {
 
         TwitchClientBuilder clientBuilder = TwitchClientBuilder.builder();
 
-        //region Chat related configuration
+        //region Auth
         OAuth2Credential credential = new OAuth2Credential(
                 "twitch",
                 configuration.getCredentials().get("irc")
         );
-
-        clientBuilder = clientBuilder
-                .withChatAccount(credential)
-                .withEnableChat(true);
         //endregion
 
-        //region Api related configuration
-        clientBuilder = clientBuilder
+        //region TwitchClient
+        twitchClient = clientBuilder
                 .withClientId(configuration.getApi().get("twitch_client_id"))
                 .withClientSecret(configuration.getApi().get("twitch_client_secret"))
                 .withEnableHelix(true)
+                /*
+                 * Chat Module
+                 * Joins irc and triggers all chat based events (viewer join/leave/sub/bits/gifted subs/...)
+                 */
+                .withChatAccount(credential)
+                .withEnableChat(true)
                 /*
                  * GraphQL has a limited support
                  * Don't expect a bunch of features enabling it
@@ -60,24 +62,23 @@ public class Bot {
                  * It is only here so you can call methods that are not (yet)
                  * implemented in Helix
                  */
-                .withEnableKraken(true);
+                .withEnableKraken(true)
+                /*
+                 * Build the TwitchClient Instance
+                 */
+                .build();
         //endregion
-
-        // Build the client out of the configured builder
-        twitchClient = clientBuilder.build();
-
-        // Register this class to receive events using the EventSubscriber Annotation
-        twitchClient.getEventManager().registerListener(this);
     }
 
     /**
      * Method to register all features
      */
     public void registerFeatures() {
-        twitchClient.getEventManager().registerListener(new WriteChannelChatToConsole());
-        twitchClient.getEventManager().registerListener(new ChannelNotificationOnFollow());
-        twitchClient.getEventManager().registerListener(new ChannelNotificationOnSubscription());
-        twitchClient.getEventManager().registerListener(new ChannelNotificationOnDonation());
+        // Register Event-based features
+        ChannelNotificationOnDonation channelNotificationOnDonation = new ChannelNotificationOnDonation(twitchClient.getEventManager());
+        ChannelNotificationOnFollow channelNotificationOnFollow = new ChannelNotificationOnFollow(twitchClient.getEventManager());
+        ChannelNotificationOnSubscription channelNotificationOnSubscription = new ChannelNotificationOnSubscription(twitchClient.getEventManager());
+        ChannelNotificationOnDonation channelNotificationOnDonation1 = new ChannelNotificationOnDonation(twitchClient.getEventManager());
     }
 
     /**
