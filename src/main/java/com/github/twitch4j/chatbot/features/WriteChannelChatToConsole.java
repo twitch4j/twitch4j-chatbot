@@ -1,17 +1,17 @@
 package com.github.twitch4j.chatbot.features;
 
-import com.github.philippheuer.events4j.EventManager;
+import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
 
 public class WriteChannelChatToConsole {
 
     /**
-     * Register events of this class with the EventManager
+     * Register events of this class with the EventManager/EventHandler
      *
-     * @param eventManager EventManager
+     * @param eventHandler SimpleEventHandler
      */
-    public WriteChannelChatToConsole(EventManager eventManager) {
-        eventManager.onEvent(ChannelMessageEvent.class).subscribe(event -> onChannelMessage(event));
+    public WriteChannelChatToConsole(SimpleEventHandler eventHandler) {
+        eventHandler.onEvent(ChannelMessageEvent.class, event -> onChannelMessage(event));
     }
 
     /**

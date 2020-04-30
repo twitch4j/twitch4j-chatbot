@@ -5,6 +5,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
+import com.github.philippheuer.events4j.simple.SimpleEventHandler;
+
 import com.github.twitch4j.chatbot.features.ChannelNotificationOnDonation;
 import com.github.twitch4j.chatbot.features.ChannelNotificationOnFollow;
 import com.github.twitch4j.chatbot.features.ChannelNotificationOnSubscription;
@@ -74,11 +76,13 @@ public class Bot {
      * Method to register all features
      */
     public void registerFeatures() {
+		SimpleEventHandler eventHandler = twitchClient.getEventManager().getEventHandler(SimpleEventHandler.class);
+
         // Register Event-based features
-        ChannelNotificationOnDonation channelNotificationOnDonation = new ChannelNotificationOnDonation(twitchClient.getEventManager());
-        ChannelNotificationOnFollow channelNotificationOnFollow = new ChannelNotificationOnFollow(twitchClient.getEventManager());
-        ChannelNotificationOnSubscription channelNotificationOnSubscription = new ChannelNotificationOnSubscription(twitchClient.getEventManager());
-        ChannelNotificationOnDonation channelNotificationOnDonation1 = new ChannelNotificationOnDonation(twitchClient.getEventManager());
+        ChannelNotificationOnDonation channelNotificationOnDonation = new ChannelNotificationOnDonation(eventHandler);
+        ChannelNotificationOnFollow channelNotificationOnFollow = new ChannelNotificationOnFollow(eventHandler);
+        ChannelNotificationOnSubscription channelNotificationOnSubscription = new ChannelNotificationOnSubscription(eventHandler);
+		WriteChannelChatToConsole writeChannelChatToConsole = new WriteChannelChatToConsole(eventHandler);
     }
 
     /**

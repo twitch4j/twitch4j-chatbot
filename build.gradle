@@ -1,31 +1,40 @@
 plugins {
-    // Add a shadowJar task to build a fatJar: build/libs/twitch4j-chatbot-all.jar
-    id 'com.github.johnrengelman.shadow' version '2.0.2'
     id 'java'
     id 'application'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-// Sets the Main-Class in the shadowJar manifest
-mainClassName = 'com.github.twitch4j.chatbot.Launcher'
-
 // Repositories
 repositories {
     jcenter()
-    maven { url "https://oss.jfrog.org/artifactory/libs-release"}
+    maven { url "https://oss.jfrog.org/artifactory/libs-release" }
 }
 
 // Dependencies
 dependencies {
     // Twitch4J
-    compile "com.github.twitch4j:twitch4j:1.0.0-alpha.7"
+	implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.0.0-alpha.19"
 
     // YAML Parser
-    compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.0"
-
-    // Logging
-    compile "ch.qos.logback:logback-classic:1.1.8"
-    compile "com.jcabi:jcabi-log:0.17.2"
+	implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.9.9"
 }
+
+// Declare Main
+application {
+	application {
+		mainClassName = "com.github.twitch4j.chatbot.Launcher"
+	}
+}
+
+// Create a fat jar at: build/libs/
+jar {
+	manifest {
+		attributes(
+			"Main-Class": "com.github.twitch4j.chatbot.Launcher"
+		)
+	}
+
+	from {
+		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+
