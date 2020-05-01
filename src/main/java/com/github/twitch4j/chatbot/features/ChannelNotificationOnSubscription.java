@@ -1,17 +1,17 @@
 package com.github.twitch4j.chatbot.features;
 
-import com.github.philippheuer.events4j.EventManager;
+import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.chat.events.channel.SubscriptionEvent;
 
 public class ChannelNotificationOnSubscription {
 
     /**
-     * Register events of this class with the EventManager
+     * Register events of this class with the EventManager/EventHandler
      *
-     * @param eventManager EventManager
+     * @param eventHandler SimpleEventHandler
      */
-    public ChannelNotificationOnSubscription(EventManager eventManager) {
-        eventManager.onEvent(SubscriptionEvent.class).subscribe(event -> onSubscription(event));
+    public ChannelNotificationOnSubscription(SimpleEventHandler eventHandler) {
+        eventHandler.onEvent(SubscriptionEvent.class, event -> onSubscription(event));
     }
 
     /**

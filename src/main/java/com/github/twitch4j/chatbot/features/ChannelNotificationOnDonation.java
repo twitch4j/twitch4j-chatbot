@@ -1,17 +1,17 @@
 package com.github.twitch4j.chatbot.features;
 
-import com.github.philippheuer.events4j.EventManager;
+import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.chat.events.channel.DonationEvent;
 
 public class ChannelNotificationOnDonation {
 
     /**
-     * Register events of this class with the EventManager
+     * Register events of this class with the EventManager/EventHandler
      *
-     * @param eventManager EventManager
+     * @param eventHandler SimpleEventHandler
      */
-    public ChannelNotificationOnDonation(EventManager eventManager) {
-        eventManager.onEvent(DonationEvent.class).subscribe(event -> onDonation(event));
+    public ChannelNotificationOnDonation(SimpleEventHandler eventHandler) {
+        eventHandler.onEvent(DonationEvent.class, event -> onDonation(event));
     }
 
     /**
