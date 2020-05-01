@@ -15,7 +15,7 @@ dependencies {
 	implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.0.0-alpha.19"
 
     // YAML Parser
-	implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.9.9"
+	implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.11.0"
 }
 
 // Declare Main
