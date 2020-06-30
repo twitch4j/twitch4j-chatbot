@@ -6,13 +6,12 @@ plugins {
 // Repositories
 repositories {
     jcenter()
-    maven { url "https://oss.jfrog.org/artifactory/libs-release" }
 }
 
 // Dependencies
 dependencies {
     // Twitch4J
-	implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.0.0-alpha.19"
+	implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.0.0"
 
     // YAML Parser
 	implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.11.0"
