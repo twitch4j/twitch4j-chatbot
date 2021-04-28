@@ -1,20 +1,24 @@
 plugins {
-    id 'java'
-    id 'application'
+    id "java"
+    id "application"
+	id "com.github.johnrengelman.shadow" version "7.0.0"
 }
 
 // Repositories
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 // Dependencies
 dependencies {
     // Twitch4J
-	implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.0.0"
+	implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.3.1"
+
+	// Logging Implementation
+	implementation group: "ch.qos.logback", name: "logback-classic", version: "1.2.3"
 
     // YAML Parser
-	implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.11.0"
+	implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.12.3"
 }
 
 // Declare Main
@@ -31,9 +35,4 @@ jar {
 			"Main-Class": "com.github.twitch4j.chatbot.Launcher"
 		)
 	}
-
-	from {
-		configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-	}
 }
-
