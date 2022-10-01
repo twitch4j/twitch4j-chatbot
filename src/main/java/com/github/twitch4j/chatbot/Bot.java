@@ -3,12 +3,12 @@ package com.github.twitch4j.chatbot;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
-import com.github.twitch4j.TwitchClient;
+import com.github.twitch4j.ITwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 
-import com.github.twitch4j.chatbot.features.ChannelNotificationOnDonation;
 import com.github.twitch4j.chatbot.features.ChannelNotificationOnFollow;
+import com.github.twitch4j.chatbot.features.ChannelNotificationOnLive;
 import com.github.twitch4j.chatbot.features.ChannelNotificationOnSubscription;
 import com.github.twitch4j.chatbot.features.WriteChannelChatToConsole;
 
@@ -24,7 +24,7 @@ public class Bot {
     /**
      * Twitch4J API
      */
-    private TwitchClient twitchClient;
+    private ITwitchClient twitchClient;
 
     /**
      * Constructor
@@ -37,38 +37,26 @@ public class Bot {
 
         //region Auth
         OAuth2Credential credential = new OAuth2Credential(
-                "twitch",
-                configuration.getCredentials().get("irc")
+            "twitch",
+            configuration.getCredentials().get("irc")
         );
         //endregion
 
         //region TwitchClient
         twitchClient = clientBuilder
-                .withClientId(configuration.getApi().get("twitch_client_id"))
-                .withClientSecret(configuration.getApi().get("twitch_client_secret"))
-                .withEnableHelix(true)
-                /*
-                 * Chat Module
-                 * Joins irc and triggers all chat based events (viewer join/leave/sub/bits/gifted subs/...)
-                 */
-                .withChatAccount(credential)
-                .withEnableChat(true)
-                /*
-                 * GraphQL has a limited support
-                 * Don't expect a bunch of features enabling it
-                 */
-                .withEnableGraphQL(true)
-                /*
-                 * Kraken is going to be deprecated
-                 * see : https://dev.twitch.tv/docs/v5/#which-api-version-can-you-use
-                 * It is only here so you can call methods that are not (yet)
-                 * implemented in Helix
-                 */
-                .withEnableKraken(true)
-                /*
-                 * Build the TwitchClient Instance
-                 */
-                .build();
+            .withClientId(configuration.getApi().get("twitch_client_id"))
+            .withClientSecret(configuration.getApi().get("twitch_client_secret"))
+            .withEnableHelix(true)
+            /*
+             * Chat Module
+             * Joins irc and triggers all chat based events (viewer join/leave/sub/bits/gifted subs/...)
+             */
+            .withChatAccount(credential)
+            .withEnableChat(true)
+            /*
+             * Build the TwitchClient Instance
+             */
+            .build();
         //endregion
     }
 
@@ -76,13 +64,13 @@ public class Bot {
      * Method to register all features
      */
     public void registerFeatures() {
-		SimpleEventHandler eventHandler = twitchClient.getEventManager().getEventHandler(SimpleEventHandler.class);
+        SimpleEventHandler eventHandler = twitchClient.getEventManager().getEventHandler(SimpleEventHandler.class);
 
         // Register Event-based features
-        ChannelNotificationOnDonation channelNotificationOnDonation = new ChannelNotificationOnDonation(eventHandler);
+        ChannelNotificationOnLive channelNotificationOnLive = new ChannelNotificationOnLive(this, eventHandler);
         ChannelNotificationOnFollow channelNotificationOnFollow = new ChannelNotificationOnFollow(eventHandler);
         ChannelNotificationOnSubscription channelNotificationOnSubscription = new ChannelNotificationOnSubscription(eventHandler);
-		WriteChannelChatToConsole writeChannelChatToConsole = new WriteChannelChatToConsole(eventHandler);
+        WriteChannelChatToConsole writeChannelChatToConsole = new WriteChannelChatToConsole(eventHandler);
     }
 
     /**
@@ -109,4 +97,7 @@ public class Bot {
         }
     }
 
+    public ITwitchClient getTwitchClient() {
+        return twitchClient;
+    }
 }
