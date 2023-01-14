@@ -95,6 +95,11 @@ public class Bot {
         for (String channel : configuration.getChannels()) {
             twitchClient.getChat().joinChannel(channel);
         }
+
+        // Enable client helper for Stream GoLive / GoOffline / GameChange / TitleChange Events
+        twitchClient.getClientHelper().enableStreamEventListener(configuration.getChannels());
+        // Enable client helper for Follow Event
+        twitchClient.getClientHelper().enableFollowEventListener(configuration.getChannels());
     }
 
     public ITwitchClient getTwitchClient() {
