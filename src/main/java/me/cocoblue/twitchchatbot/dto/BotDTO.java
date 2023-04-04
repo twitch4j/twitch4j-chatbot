@@ -1,36 +1,35 @@
-package com.github.twitch4j.chatbot;
+package me.cocoblue.twitchchatbot.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
+import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.ITwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
-import com.github.philippheuer.events4j.simple.SimpleEventHandler;
-
-import com.github.twitch4j.chatbot.features.ChannelNotificationOnFollow;
-import com.github.twitch4j.chatbot.features.ChannelNotificationOnLive;
-import com.github.twitch4j.chatbot.features.ChannelNotificationOnSubscription;
-import com.github.twitch4j.chatbot.features.WriteChannelChatToConsole;
+import me.cocoblue.twitchchatbot.features.ChannelNotificationOnFollow;
+import me.cocoblue.twitchchatbot.features.ChannelNotificationOnLive;
+import me.cocoblue.twitchchatbot.features.ChannelNotificationOnSubscription;
+import me.cocoblue.twitchchatbot.features.WriteChannelChatToConsole;
 
 import java.io.InputStream;
 
-public class Bot {
+public class BotDTO {
 
     /**
-     * Holds the Bot Configuration
+     * Holds the BotDTO ConfigurationDTO
      */
-    private Configuration configuration;
+    private ConfigurationDTO configuration;
 
     /**
      * Twitch4J API
      */
-    private ITwitchClient twitchClient;
+    private final ITwitchClient twitchClient;
 
     /**
      * Constructor
      */
-    public Bot() {
-        // Load Configuration
+    public BotDTO() {
+        // Load ConfigurationDTO
         loadConfiguration();
 
         TwitchClientBuilder clientBuilder = TwitchClientBuilder.builder();
@@ -74,7 +73,7 @@ public class Bot {
     }
 
     /**
-     * Load the Configuration
+     * Load the ConfigurationDTO
      */
     private void loadConfiguration() {
         try {
@@ -82,10 +81,10 @@ public class Bot {
             InputStream is = classloader.getResourceAsStream("config.yaml");
 
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            configuration = mapper.readValue(is, Configuration.class);
+            configuration = mapper.readValue(is, ConfigurationDTO.class);
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.out.println("Unable to load Configuration ... Exiting.");
+            System.out.println("Unable to load ConfigurationDTO ... Exiting.");
             System.exit(1);
         }
     }
@@ -94,6 +93,7 @@ public class Bot {
         // Connect to all channels
         for (String channel : configuration.getChannels()) {
             twitchClient.getChat().joinChannel(channel);
+            twitchClient.getChat().sendMessage(channel, "Joined!!");
         }
 
         // Enable client helper for Stream GoLive / GoOffline / GameChange / TitleChange Events

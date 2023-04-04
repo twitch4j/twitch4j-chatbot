@@ -1,8 +1,13 @@
 plugins {
     id "java"
-    id "application"
     id "com.github.johnrengelman.shadow" version "7.1.2"
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
+
+group = 'me.cocoblue'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
 // Repositories
 repositories {
@@ -11,28 +16,13 @@ repositories {
 
 // Dependencies
 dependencies {
-    // Twitch4J
-    implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.12.0"
-
-    // Logging Implementation
-    implementation group: "ch.qos.logback", name: "logback-classic", version: "1.3.1"
-
-    // YAML Parser
+    implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.14.0"
     implementation group: "com.fasterxml.jackson.dataformat", name: "jackson-dataformat-yaml", version: "2.13.4"
-}
-
-// Declare Main
-application {
-    application {
-        mainClassName = "com.github.twitch4j.chatbot.Launcher"
-    }
-}
-
-// Create a fat jar at: build/libs/
-jar {
-    manifest {
-        attributes(
-                "Main-Class": "com.github.twitch4j.chatbot.Launcher"
-        )
-    }
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

@@ -1,4 +1,4 @@
-package com.github.twitch4j.chatbot.features;
+package me.cocoblue.twitchchatbot.features;
 
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.chat.events.channel.FollowEvent;
@@ -11,7 +11,7 @@ public class ChannelNotificationOnFollow {
      * @param eventHandler SimpleEventHandler
      */
     public ChannelNotificationOnFollow(SimpleEventHandler eventHandler) {
-        eventHandler.onEvent(FollowEvent.class, event -> onFollow(event));
+        eventHandler.onEvent(FollowEvent.class, this::onFollow);
     }
 
     /**

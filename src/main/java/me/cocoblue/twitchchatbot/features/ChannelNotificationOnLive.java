@@ -1,21 +1,21 @@
-package com.github.twitch4j.chatbot.features;
+package me.cocoblue.twitchchatbot.features;
 
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
-import com.github.twitch4j.chatbot.Bot;
 import com.github.twitch4j.events.ChannelGoLiveEvent;
+import me.cocoblue.twitchchatbot.dto.BotDTO;
 
 public class ChannelNotificationOnLive {
 
-    private final Bot bot;
+    private final BotDTO botDTO;
 
     /**
      * Register events of this class with the EventManager/EventHandler
      *
-     * @param bot          the bot instance
+     * @param botDTO          the botDTO instance
      * @param eventHandler SimpleEventHandler
      */
-    public ChannelNotificationOnLive(Bot bot, SimpleEventHandler eventHandler) {
-        this.bot = bot;
+    public ChannelNotificationOnLive(BotDTO botDTO, SimpleEventHandler eventHandler) {
+        this.botDTO = botDTO;
         eventHandler.onEvent(ChannelGoLiveEvent.class, this::onGoLive);
     }
 
@@ -28,7 +28,7 @@ public class ChannelNotificationOnLive {
             event.getChannel().getName()
         );
 
-        bot.getTwitchClient().getChat().sendMessage(event.getChannel().getName(), message);
+        botDTO.getTwitchClient().getChat().sendMessage(event.getChannel().getName(), message);
     }
 
 }

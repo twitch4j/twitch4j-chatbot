@@ -17,14 +17,13 @@
 debug: false
 bot:
     # Name of your bot
-    name: "twitch4j chatbot"
+    name: ""
 
     # Current version of your bot
     version: "0.1"
 
 # Application - API Settings
 api:
-    # Twitch Application Client Id
     twitch_client_id: YOUR_CLIENT_ID
 
     # Twitch Application Client Secret

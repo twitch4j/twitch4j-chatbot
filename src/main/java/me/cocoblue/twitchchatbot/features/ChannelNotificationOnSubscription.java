@@ -1,4 +1,4 @@
-package com.github.twitch4j.chatbot.features;
+package me.cocoblue.twitchchatbot.features;
 
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.chat.events.channel.SubscriptionEvent;
@@ -11,7 +11,7 @@ public class ChannelNotificationOnSubscription {
      * @param eventHandler SimpleEventHandler
      */
     public ChannelNotificationOnSubscription(SimpleEventHandler eventHandler) {
-        eventHandler.onEvent(SubscriptionEvent.class, event -> onSubscription(event));
+        eventHandler.onEvent(SubscriptionEvent.class, this::onSubscription);
     }
 
     /**

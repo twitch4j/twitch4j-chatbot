@@ -1,4 +1,4 @@
-package com.github.twitch4j.chatbot.features;
+package me.cocoblue.twitchchatbot.features;
 
 import com.github.philippheuer.events4j.simple.SimpleEventHandler;
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
@@ -11,7 +11,7 @@ public class WriteChannelChatToConsole {
      * @param eventHandler SimpleEventHandler
      */
     public WriteChannelChatToConsole(SimpleEventHandler eventHandler) {
-        eventHandler.onEvent(ChannelMessageEvent.class, event -> onChannelMessage(event));
+        eventHandler.onEvent(ChannelMessageEvent.class, this::onChannelMessage);
     }
 
     /**
