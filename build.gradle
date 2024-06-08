@@ -12,7 +12,7 @@ repositories {
 // Dependencies
 dependencies {
     // Twitch4J
-    implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.12.0"
+    implementation group: "com.github.twitch4j", name: "twitch4j", version: "1.20.0"
 
     // Logging Implementation
     implementation group: "ch.qos.logback", name: "logback-classic", version: "1.3.1"
